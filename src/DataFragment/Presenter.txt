@@ -11,7 +11,7 @@ import $importPtah.ui.$nameActivity;
  * Deprecated:
  */
 
-public class $namePresenter extends AacDataFPresenter<$nameActivity,String> {
+public class $namePresenter extends AacDataFPresenter<$nameFragment,String> {
     public static final String TAG = $namePresenter.class.getName();
     private $nameViewModel m$name;
     @Override

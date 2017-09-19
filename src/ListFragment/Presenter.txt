@@ -3,7 +3,7 @@ package $packageName$extendName;
 
 import com.aac.expansion.list.AacListFragmentPresenter;
 import $importPtah.model.$nameViewModel;
-import $importPtah.ui.$nameActivity;
+import $importPtah.ui.$nameFragment;
 
 /**
  * Created by $author on $date

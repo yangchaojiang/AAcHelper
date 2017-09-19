@@ -16,7 +16,7 @@ import $importPtah.presenter.$namePresenter;
  * Deprecated:
  */
 @RequiresPresenter($namePresenter.class)
-public class $nameActivity extends AacFragment<$namePresenter> {
+public class $nameFragment extends AacFragment<$namePresenter> {
 
       @Nullable
        @Override
