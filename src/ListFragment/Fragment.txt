@@ -1,0 +1,45 @@
+package $packageName$extendName;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable
+import android.view.View;
+import com.aac.expansion.list.AacListFragment;
+import com.aac.module.pres.RequiresPresenter;
+import com.chad.library.adapter.base.BaseViewHolder;
+import $packageName.R;
+import $importPtah.presenter.$namePresenter;
+/**
+ * Created by $author on $date
+ * E-Mail:yangchaojiang@outlook.com
+ * Deprecated:
+ */
+@RequiresPresenter($namePresenter.class)
+public class $nameFragment extends AacListFragment<$namePresenter,String> {
+
+    /***
+        * ??1 list ??1 GridS
+        * **/
+       @Override
+       public int setGridSpanCount() {
+           return 3;
+       }
+       @Override
+       public int getItemLayout() {
+           return android.R.layout.simple_list_item_2;
+       }
+       @Override
+       public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+           super.onViewCreated(view, savedInstanceState);
+           //setStartLoadMore(true);
+       }
+
+       @Override
+       public void convertViewHolder(BaseViewHolder helper, String item) {
+          // helper.setText(android.R.id.text1, item);
+          // helper.setText(android.R.id.text2, item);
+       }
+       @Override
+       protected boolean setOpenLazyLoad() {
+           return true;
+       }
+}

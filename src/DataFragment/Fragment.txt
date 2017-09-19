@@ -1,0 +1,29 @@
+package $packageName$extendName;
+
+import android.support.annotation.NonNull;
+import com.aac.expansion.data.AacDataFragment;
+import com.aac.module.pres.RequiresPresenter;
+import $packageName.R;
+import $importPtah.presenter.$namePresenter;
+
+/**
+ * Created by $author on $date
+ * E-Mail:yangchaojiang@outlook.com
+ * Deprecated:
+ */
+@RequiresPresenter($namePresenter.class)
+public class $nameFragment extends AacDataFragment<$namePresenter,String> {
+
+        @Override
+        public int getContentLayout() {
+            return R.layout.fragment_$smallName;
+        }
+        @Override
+        public void setData(@NonNull String data) {
+
+        }
+        @Override
+        public void setError(Throwable e) {
+
+        }
+}

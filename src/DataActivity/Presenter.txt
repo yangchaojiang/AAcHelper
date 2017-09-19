@@ -1,0 +1,27 @@
+package $packageName$extendName;
+
+
+import com.aac.expansion.data.AacDataAPresenter;
+import $importPtah.model.$nameViewModel;
+import $importPtah.ui.$nameActivity;
+
+/**
+ * Created by $author on $date
+ * E-Mail:yangchaojiang@outlook.com
+ * Deprecated:
+ */
+
+public class $namePresenter extends AacDataAPresenter<$nameActivity, String> {
+    public static final String TAG = $namePresenter.class.getName();
+    private $nameViewModel m$name;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        m$name = getViewModel($nameViewModel.class);
+    }
+
+    @Override
+    protected void onCreateView() {
+        super.onCreateView();
+    }
+}
