@@ -1,8 +1,8 @@
 <idea-plugin>
     <id>com.your.company.unique.plugin.id</id>
     <name>AAcHelper</name>
-    <version>1.0</version>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YangJiang</vendor>
+    <version>2.2</version>
+    <vendor email="yanchaojiang@outlook.com" url="https://github.com/yangchaojiang">YangJiang</vendor>
 
     <description><![CDATA[
       Enter short description for your plugin here.<br>
@@ -30,7 +30,7 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action id="aac.NewAacActivity" class="action.AacAction" text="NewAac" description="NewAacActivity">
+        <action id="aac.NewAacActivity" class="action.AacAction" text="NewAac" description="NewAacActivity"  >
             <add-to-group group-id="NewGroup1" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt N"/>
         </action>

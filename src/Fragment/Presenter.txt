@@ -3,7 +3,7 @@ package $packageName$extendName;
 
 import com.aac.module.ui.AacFragmentPresenter;
 import $importPtah.model.$nameViewModel;
-import $importPtah.ui.$nameActivity;
+import $importPtah.ui.$nameFragment;
 
 /**
  * Created by $author on $date
@@ -11,7 +11,7 @@ import $importPtah.ui.$nameActivity;
  * Deprecated:
  */
 
-public class $namePresenter extends AacFragmentPresenter<$nameActivity> {
+public class $namePresenter extends AacFragmentPresenter<$nameFragment> {
     public static final String TAG = $namePresenter.class.getName();
     private $nameViewModel m$name;
     @Override

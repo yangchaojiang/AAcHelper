@@ -1,0 +1,27 @@
+package $packageName$extendName
+
+
+import com.aac.expansion.list.AacListPresenter
+import $importPtah.model.$nameViewModel
+import $importPtah.ui.$nameActivity
+
+/**
+ * Created by $author on $date
+ * E-Mail:yangchaojiang@outlook.com
+ * Deprecated:
+ */
+class $namePresenter : AacListPresenter<$nameActivity, String>() {
+    private var m$name: $nameViewModel? = null
+    public override fun onCreate() {
+        super.onCreate()
+        m$name = getViewModel($nameViewModel::class.java)
+    }
+
+    override fun setLoadData(pager: Int) {
+        //  viewModel.getListData(pager).observe(getView(), getDataSubscriber());
+    }
+
+    companion object {
+        val TAG = $namePresenter::class.java.name
+    }
+}

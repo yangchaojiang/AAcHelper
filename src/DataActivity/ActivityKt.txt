@@ -1,0 +1,34 @@
+package $packageName$extendName
+
+import android.app.Activity
+import android.content.Intent
+import android.support.annotation.NonNull
+import com.aac.expansion.data.AacDataActivity
+import com.aac.module.pres.RequiresPresenter
+import $packageName.R
+import $importPtah.presenter.$namePresenter
+import  kotlinx.android.synthetic.main.activity_$smallName.*
+/**
+ * Created by $author on $date
+ * E-Mail:yangchaojiang@outlook.com
+ * Deprecated:
+ */
+ @RequiresPresenter($namePresenter::class)
+ class $nameActivity : AacDataActivity<$namePresenter, String>() {
+     override fun getContentLayout(): Int {
+         return R.layout.activity_$smallName
+     }
+     override fun setData(data: String) {
+
+     }
+     override fun setError(e: Throwable) {
+
+     }
+     companion object {
+         fun startActivity(activity: Activity) {
+             val intent = Intent(activity, $nameActivity::class.java)
+             activity.startActivity(intent)
+         }
+     }
+ }
+

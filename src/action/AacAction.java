@@ -1,9 +1,10 @@
 package action;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import dialog.AacDialog;
 
-import java.io.*;
+import java.io.File;
 
 /**
  * Created by FengTing on 2017/1/4.
@@ -12,18 +13,25 @@ public class AacAction extends AacBaseAction {
 
 
     @Override
+    public void update(AnActionEvent e) {
+        super.update(e);
+        e.getPresentation().setIcon(AllIcons.General.Add);
+    }
+
+    @Override
     public void actionPerformed(AnActionEvent e) {
         super.actionPerformed(e);
         AacDialog dialog = new AacDialog();
-        dialog.setListener((msg, indexType, indexViewType) ->
-                selectIndex(e, msg, indexType, indexViewType)
+        dialog.setListener((msg, lanType,indexType, indexViewType) ->
+                selectIndex(e, msg,lanType, indexType, indexViewType)
         );
         dialog.pack();
         dialog.setVisible(true);
-
     }
 
-    private void selectIndex(AnActionEvent e, String msg, int indexType, int indexViewType) {
+
+
+    private void selectIndex(AnActionEvent e, String msg, int lanType,int indexType, int indexViewType) {
         String type;
         switch (indexType) {
             case 0:
@@ -63,27 +71,45 @@ public class AacAction extends AacBaseAction {
                 }
                 break;
         }
-        init(e, msg, type, indexViewType);
+        init(e, msg, type,lanType ,indexViewType);
     }
 
-    private void init(AnActionEvent e, String name, String typeName, int indexViewType) {
+    private void init(AnActionEvent e, String name, String typeName,int lanType, int indexViewType) {
         smallName = toUpperOrNot(name, false);
         bigname = toUpperOrNot(name, true);
         String s;
         String fileName = null;
-        if (indexViewType == 0) {
-            s = "Activity.txt";
-            fileName = "activity_.txt";
-        } else if (indexViewType == 1) {
-            s = "Fragment.txt";
-            fileName = "fragment_.txt";
-        } else {
-            s = "Service.txt";
+        String presenterType;
+        String viewModelType;
+        if (lanType==1){
+            if (indexViewType == 0) {
+                s = "ActivityKt.txt";
+                fileName = "activity_.txt";
+            } else if (indexViewType == 1) {
+                s = "FragmentKt.txt";
+                fileName = "fragment_.txt";
+            } else {
+                s = "ServiceKt.txt";
+            }
+            presenterType="PresenterKt.txt";
+            viewModelType="ViewModelKt.txt";
+        }else {
+            if (indexViewType == 0) {
+                s = "Activity.txt";
+                fileName = "activity_.txt";
+            } else if (indexViewType == 1) {
+                s = "Fragment.txt";
+                fileName = "fragment_.txt";
+            } else {
+                s = "Service.txt";
+            }
+            presenterType="Presenter.txt";
+            viewModelType="ViewModel.txt";
         }
         // 创建四个MVP
-        createFile(typeName, s, basePath + "/" + smallName + "/ui", bigname);
-        createFile(typeName, "Presenter.txt", basePath + "/" + smallName + "/presenter", bigname);
-        createFile(typeName, "ViewModel.txt", basePath + "/" + smallName + "/model", bigname);
+        createFile(typeName, s, basePath + "/" + smallName + "/ui", bigname,lanType==0);
+        createFile(typeName, presenterType, basePath + "/" + smallName + "/presenter", bigname,lanType==0);
+        createFile("view", viewModelType, basePath + "/" + smallName + "/model", bigname,lanType==0);
         if (indexViewType != 2) {
             //写入layout 资源文件
             File layoutFile = new File(this.getClass().getResource("/Layout/" + fileName).getFile());

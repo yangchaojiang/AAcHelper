@@ -1,0 +1,25 @@
+package $packageName$extendName
+
+import android.os.Bundle
+import android.support.annotation.Nullable
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.aac.module.ui.AacFragment
+import com.aac.module.pres.RequiresPresenter
+import $packageName.R
+import $importPtah.presenter.$namePresenter
+import  kotlinx.android.synthetic.main.fragment_$smallName.*
+/**
+ * Created by $author on $date
+ * E-Mail:yangchaojiang@outlook.com
+ * Deprecated:
+ */
+
+@RequiresPresenter($namePresenter::class)
+class $nameFragment : AacFragment<$namePresenter>() {
+
+     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+             inflater!!.inflate(R.layout.fragment_$smallName, container, false)
+ }
+

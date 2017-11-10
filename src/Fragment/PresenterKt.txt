@@ -1,0 +1,27 @@
+package $packageName$extendName
+
+
+import com.aac.module.ui.AacFragmentPresenter
+import $importPtah.model.$nameViewModel
+import $importPtah.ui.$nameFragment
+
+/**
+ * Created by $author on $date
+ * E-Mail:yangchaojiang@outlook.com
+ * Deprecated:
+ */
+class $namePresenter : AacFragmentPresenter<$nameFragment>() {
+    private var m$name: $nameViewModel? = null
+    public override fun onCreate() {
+        super.onCreate()
+        m$name = getViewModel($nameViewModel::class.java)
+    }
+
+    override fun onCreateView() {
+        super.onCreateView()
+    }
+
+    companion object {
+        val TAG = $namePresenter::class.java.name
+    }
+}

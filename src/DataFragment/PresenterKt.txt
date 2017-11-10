@@ -1,0 +1,31 @@
+package $packageName$extendName
+
+
+import com.aac.expansion.data.AacDataFPresenter
+import $importPtah.model.$nameViewModel
+import $importPtah.ui.$nameFragment
+
+/**
+ * Created by $author on $date
+ * E-Mail:yangchaojiang@outlook.com
+ * Deprecated:
+ */
+class $namePresenter : AacDataFPresenter<$nameFragment, String>() {
+    private var m$name: $nameViewModel? = null
+    public override fun onCreate() {
+        super.onCreate()
+        m$name = getViewModel($nameViewModel::class.java)
+    }
+
+    override fun onCreateView() {
+        super.onCreateView()
+    }
+
+    override fun lazyLoad() {
+        //m$name.getData().observe(getView(),getDataSubscriber());
+    }
+
+    companion object {
+        val TAG = $namePresenter::class.java.name
+    }
+}

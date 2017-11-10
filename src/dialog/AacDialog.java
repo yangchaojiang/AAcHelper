@@ -14,6 +14,7 @@ public class AacDialog extends JDialog {
     private JComboBox aacTpye;
     private JComboBox aaViewType;
     private JTextField aacName;
+    private JComboBox lanType;
     private DataListener listener;
 
     public AacDialog() {
@@ -29,7 +30,6 @@ public class AacDialog extends JDialog {
         setTitle("新建Aac，输入您的模块名称");
         setSize(500, 300);
         buttonOK.addActionListener(e -> onOK());
-
         buttonCancel.addActionListener(e -> onCancel());
 
         // call onCancel() when cross is clicked
@@ -50,7 +50,7 @@ public class AacDialog extends JDialog {
             Messages.showInfoMessage("名称好像啥也没填！", "提示");
             return;
         }
-        listener.selectValue(aacName.getText().trim(), aacTpye.getSelectedIndex(), aaViewType.getSelectedIndex());
+        listener.selectValue(aacName.getText().trim(), lanType.getSelectedIndex(),aacTpye.getSelectedIndex(), aaViewType.getSelectedIndex());
          dispose();
     }
 
@@ -61,7 +61,7 @@ public class AacDialog extends JDialog {
 
     public static void main(String[] args) {
         AacDialog dialog = new AacDialog();
-        dialog.setListener((msg, indexType, indexViewType) -> {
+        dialog.setListener((msg,lanType, indexType, indexViewType) -> {
             Messages.showInfoMessage(msg, "提示");
         });
         dialog.pack();
@@ -78,7 +78,7 @@ public class AacDialog extends JDialog {
     }
 
     public interface DataListener {
-        void selectValue(String msg, int indexType, int indexViewType);
+        void selectValue(String msg,  int lanType,int indexType, int indexViewType);
 
     }
 }

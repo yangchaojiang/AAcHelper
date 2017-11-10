@@ -1,0 +1,29 @@
+package $packageName$extendName
+
+
+
+import com.aac.module.ui.AacPresenter
+import $importPtah.model.$nameViewModel
+import $importPtah.ui.$nameService
+
+/**
+ * Created by $author on $date
+ * E-Mail:yangchaojiang@outlook.com
+ * Deprecated:
+ */
+class TestsPresenter : AacPresenter<$nameService>() {
+    private var m$name: $nameViewModel? = null
+    public override fun onCreate() {
+        super.onCreate()
+        m$name = getViewModel($nameViewModel::class.java)
+    }
+
+    override fun onCreateView() {
+        super.onCreateView()
+    }
+
+    companion object {
+        val TAG = $namePresenter::class.java.name
+    }
+
+}

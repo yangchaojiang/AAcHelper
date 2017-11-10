@@ -1,11 +1,11 @@
 package action;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,7 +20,6 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.awt.*;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,6 +37,7 @@ public abstract class AacBaseAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
+        e.getPresentation().setIcon(AllIcons.General.Add);
         VirtualFile file = DataKeys.VIRTUAL_FILE.getData(e.getDataContext());
         assert file != null;
         basePath = file.getPath();
@@ -102,7 +102,7 @@ public abstract class AacBaseAction extends AnAction {
      * @param toPath   路径
      * @param firstName 选中
      */
-    public void createFile(String activity, String s, String toPath, String firstName) {
+    public void createFile(String activity, String s, String toPath, String firstName,boolean fileType) {
         String ss = toPath.replace("/", ".");
         int start = ss.indexOf(packageName);
         String extendName = toPath.substring(start + packageName.length()).replace("/", ".");
@@ -116,7 +116,7 @@ public abstract class AacBaseAction extends AnAction {
         content = content.replace("$author", userName);
         content = content.replace("$extendName", extendName);
         content = content.replace("$importPtah", packageName + extendName2);
-        writetoFile(content, toPath, firstName + s.replace("txt", "java"));
+        writetoFile(content, toPath, firstName + s.replace("txt", fileType?"java":"kt").replace("Kt",""));
     }
 
 

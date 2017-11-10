@@ -1,0 +1,37 @@
+package $packageName$extendName
+
+import android.content.Context
+import android.content.Intent
+import android.os.IBinder
+import android.support.annotation.Nullable
+
+import com.aac.module.ui.AacService
+import com.aac.module.pres.RequiresPresenter
+import $importPtah.presenter.$namePresenter
+
+/**
+ * Created by $author on $date
+ * E-Mail:yangchaojiang@outlook.com
+ * Deprecated:
+ */
+
+ @RequiresPresenter($namePresenter::class)
+ class $nameService : AacService<$namePresenter>() {
+
+     override fun onBind(intent: Intent?): IBinder? {
+         return super.onBind(intent)
+     }
+
+     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+         return super.onStartCommand(intent, flags, startId)
+     }
+
+     companion object {
+
+         fun startService(context: Context) {
+             val intent = Intent(context, $nameService::class.java)
+             context.startService(intent)
+         }
+     }
+
+ }
