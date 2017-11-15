@@ -11,7 +11,7 @@ import $importPtah.ui.$nameActivity
  * Deprecated:
  */
  
-class $nameActivity : AacPresenter<$nameActivity>() {
+class $namePresenter : AacPresenter<$nameActivity>() {
     private var m$name: $nameViewModel? = null
     public override fun onCreate() {
         super.onCreate()
