@@ -14,7 +14,7 @@ class $namePresenter : AacDataAPresenter<$nameActivity, String>() {
     private var m$name: $nameViewModel? = null
     public override fun onCreate() {
         super.onCreate()
-        mTest = getViewModel($nameViewModel::class.java)
+        m$name = getViewModel($nameViewModel::class.java)
     }
 
     override fun onCreateView() {
