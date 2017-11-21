@@ -15,9 +15,9 @@ import  kotlinx.android.synthetic.main.activity_$smallName.*
  */
  @RequiresPresenter($namePresenter::class)
  class $nameActivity : AacDataActivity<$namePresenter, String>() {
-     override fun getContentLayout(): Int {
-         return R.layout.activity_$smallName
-     }
+
+     override fun getContentLayout(): Int = R.layout.activity_$smallName
+
      override fun setData(data: String) {
 
      }

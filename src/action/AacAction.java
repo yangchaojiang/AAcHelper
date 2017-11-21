@@ -130,7 +130,7 @@ public class AacAction extends AacBaseAction {
         refreshProject(e);
     }
 
-    public static void main(String[] ags) {
+  public static void main(String[] ags) {
         String extendName = "tex.text2.ui";
         String extendName2 = extendName.substring(0, extendName.lastIndexOf(".")).toLowerCase();
         System.out.println("text:" + extendName2);
