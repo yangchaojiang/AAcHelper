@@ -9,6 +9,7 @@ import com.aac.module.pres.RequiresPresenter
 import com.chad.library.adapter.base.BaseViewHolder
 import $packageName.R
 import $importPtah.presenter.$namePresenter
+import $importPtah.bean.$beanBean
 import  kotlinx.android.synthetic.main.activity_$smallName.*
 /**
  * Created by $author on $date
@@ -17,22 +18,17 @@ import  kotlinx.android.synthetic.main.activity_$smallName.*
  */
 
  @RequiresPresenter($namePresenter::class)
- class $nameActivity : AacListActivity<$namePresenter, String>() {
+ class $nameActivity : AacListActivity<$namePresenter, $beanBean>() {
    override fun getItemLayout(): Int=android.R.layout.simple_list_item_2
 
      override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
-         setLoadMore(true)
+        // setLoadMore(true)
      }
 
-     override fun onPostCreate(savedInstanceState: Bundle?) {
-         super.onPostCreate(savedInstanceState)
-         supportActionBar!!.title = "列表数据"
-     }
-
-     override fun convertViewHolder(helper: BaseViewHolder, item: String) {
-         helper.setText(android.R.id.text1, item)
-         helper.setText(android.R.id.text2, item)
+     override fun convertViewHolder(helper: BaseViewHolder, item: $beanBean) {
+         // helper.setText(android.R.id.text1, item)
+         //helper.setText(android.R.id.text2, item)
      }
 
      companion object {

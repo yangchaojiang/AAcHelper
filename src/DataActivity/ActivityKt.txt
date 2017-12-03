@@ -7,6 +7,7 @@ import com.aac.expansion.data.AacDataActivity
 import com.aac.module.pres.RequiresPresenter
 import $packageName.R
 import $importPtah.presenter.$namePresenter
+import $importPtah.bean.$beanBean
 import  kotlinx.android.synthetic.main.activity_$smallName.*
 /**
  * Created by $author on $date
@@ -14,11 +15,11 @@ import  kotlinx.android.synthetic.main.activity_$smallName.*
  * Deprecated:
  */
  @RequiresPresenter($namePresenter::class)
- class $nameActivity : AacDataActivity<$namePresenter, String>() {
+ class $nameActivity : AacDataActivity<$namePresenter, $beanBean>() {
 
      override fun getContentLayoutId():Int=  R.layout.activity_$smallName
 
-     override fun setData(data: String) {
+     override fun setData(data: $beanBean) {
 
      }
      override fun setError(e: Throwable) {

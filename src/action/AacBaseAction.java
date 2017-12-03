@@ -34,14 +34,13 @@ public abstract class AacBaseAction extends AnAction {
     String bigname;
     String userName;
     String basePath;
-
+    String beanBean;
     @Override
     public void actionPerformed(AnActionEvent e) {
         e.getPresentation().setIcon(AllIcons.General.Add);
         VirtualFile file = DataKeys.VIRTUAL_FILE.getData(e.getDataContext());
         assert file != null;
         basePath = file.getPath();
-        // TODO: insert action logic here
         Map<String, String> map = System.getenv();
         userName = map.get("USERNAME");// 获取用户名
         project = e.getData(PlatformDataKeys.PROJECT);
@@ -89,25 +88,32 @@ public abstract class AacBaseAction extends AnAction {
      * 创建文件
      *
      * @param activity 活动
-     * @param s        文件名称
+     * @param name        文件名称
      * @param toPath   路径
-     * @param firstName 选中
      */
-    public void createFile(String activity, String s, String toPath, String firstName,boolean fileType) {
+    public void createFile(String activity, String name, String toPath,boolean fileType) {
         String ss = toPath.replace("/", ".");
         int start = ss.indexOf(packageName);
         String extendName = toPath.substring(start + packageName.length()).replace("/", ".");
         String extendName2=extendName.substring(0,extendName.lastIndexOf(".")).toLowerCase();
         String content;
-        content = readFile("/" + activity + "/" + s);
+        content = readFile("/" + activity + "/" + name);
         content = content.replace("$packageName", packageName);
         content = content.replace("$date", getNowDateShort());
         content = content.replace("$smallName", smallName);
         content = content.replace("$name", bigname);
         content = content.replace("$author", userName);
         content = content.replace("$extendName", extendName);
+        if (beanBean!=null&&!beanBean.isEmpty()) {
+            content = content.replace("$beanBean", beanBean);
+        }
         content = content.replace("$importPtah", packageName + extendName2);
-        writetoFile(content, toPath, firstName + s.replace("txt", fileType?"java":"kt").replace("Kt",""));
+        if (activity.equals("bean")){
+            writeToFile(content, toPath,  beanBean+name.replace("TestBean","").replace("txt", fileType?"java":"kt").replace("Kt",""));
+        }else{
+            writeToFile(content, toPath,  bigname+name.replace("txt", fileType?"java":"kt").replace("Kt",""));
+        }
+
     }
 
 
@@ -118,7 +124,7 @@ public abstract class AacBaseAction extends AnAction {
      * @param b true 大写 false 小写
      * @return String
      */
-    public String toUpperOrNot(String s, boolean b) {
+    public static String toUpperOrNot(String s, boolean b) {
         char[] cs = s.toCharArray();
         char c = cs[0];
         boolean isSmall = false;
@@ -138,7 +144,7 @@ public abstract class AacBaseAction extends AnAction {
         return String.valueOf(cs);
     }
 
-    public void writetoFile(String content, String filepath, String filename) {
+    public void writeToFile(String content, String filepath, String filename) {
         try {
             File floder = new File(filepath);
             // if file doesnt exists, then create it

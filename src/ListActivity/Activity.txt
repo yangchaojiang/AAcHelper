@@ -9,14 +9,14 @@ import com.aac.module.pres.RequiresPresenter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import $packageName.R;
 import $importPtah.presenter.$namePresenter;
-
+import $importPtah.bean.$beanBean;
 /**
  * Created by $author on $date
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:
  */
 @RequiresPresenter($namePresenter.class)
-public class $nameActivity extends AacListActivity<$namePresenter, String> {
+public class $nameActivity extends AacListActivity<$namePresenter, $beanBean> {
 
     public static void startActivity(Activity activity) {
         Intent intent = new Intent(activity,$nameActivity.class);
@@ -27,18 +27,15 @@ public class $nameActivity extends AacListActivity<$namePresenter, String> {
           super.onCreate(savedInstanceState);
           setLoadMore(true);
       }
-      @Override
-      protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-          super.onPostCreate(savedInstanceState);
-          getSupportActionBar().setTitle("列表数据");
-      }
+
+
       @Override
       public int getItemLayout() {
           return android.R.layout.simple_list_item_2;
       }
       @Override
-      public void convertViewHolder(BaseViewHolder helper, String item) {
-          helper.setText(android.R.id.text1, item);
-          helper.setText(android.R.id.text2, item);
+      public void convertViewHolder(BaseViewHolder helper, $beanBean item) {
+          //helper.setText(android.R.id.text1, item);
+         // helper.setText(android.R.id.text2, item);
       }
 }

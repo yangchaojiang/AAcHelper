@@ -4,14 +4,14 @@ package $packageName$extendName;
 import com.aac.expansion.data.AacDataFPresenter;
 import $importPtah.model.$nameViewModel;
 import $importPtah.ui.$nameFragment;
-
+import $importPtah.bean.$beanBean;
 /**
  * Created by $author on $date
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:
  */
 
-public class $namePresenter extends AacDataFPresenter<$nameFragment,String> {
+public class $namePresenter extends AacDataFPresenter<$nameFragment,$beanBean> {
     public static final String TAG = $namePresenter.class.getName();
     private $nameViewModel m$name;
     @Override
@@ -27,5 +27,9 @@ public class $namePresenter extends AacDataFPresenter<$nameFragment,String> {
     @Override
     protected void lazyLoad() {
        //m$name.getData().observe(getView(),getDataSubscriber());
+    }
+   @Override
+    public void retryData() {
+
     }
 }

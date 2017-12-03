@@ -4,13 +4,13 @@ package $packageName$extendName
 import com.aac.expansion.list.AacListFragmentPresenter
 import $importPtah.model.$nameViewModel
 import $importPtah.ui.$nameFragment
-
+import $importPtah.bean.$beanBean
 /**
  * Created by $author on $date
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:
  */
-class $namePresenter : AacListFragmentPresenter<$nameFragment, String>() {
+class $namePresenter : AacListFragmentPresenter<$nameFragment, $beanBean>() {
     private var m$name: $nameViewModel? = null
     public override fun onCreate() {
         super.onCreate()

@@ -24,4 +24,5 @@ public class $namePresenter extends AacPresenter<$nameActivity> {
     protected void onCreateView() {
         super.onCreateView();
     }
+
 }

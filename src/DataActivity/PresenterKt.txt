@@ -4,14 +4,15 @@ package $packageName$extendName
 import com.aac.expansion.data.AacDataAPresenter
 import $importPtah.model.$nameViewModel
 import $importPtah.ui.$nameActivity
-
+import $importPtah.bean.$beanBean
 /**
  * Created by $author on $date
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:
  */
-class $namePresenter : AacDataAPresenter<$nameActivity, String>() {
+class $namePresenter : AacDataAPresenter<$nameActivity, $beanBean>() {
     private var m$name: $nameViewModel? = null
+
     public override fun onCreate() {
         super.onCreate()
         m$name = getViewModel($nameViewModel::class.java)
@@ -20,7 +21,9 @@ class $namePresenter : AacDataAPresenter<$nameActivity, String>() {
     override fun onCreateView() {
         super.onCreateView()
     }
+    override fun retryData() {
 
+     }
     companion object {
         val TAG = $namePresenter::class.java!!.name
     }

@@ -4,13 +4,13 @@ package $packageName$extendName
 import com.aac.expansion.list.AacListPresenter
 import $importPtah.model.$nameViewModel
 import $importPtah.ui.$nameActivity
-
+import $importPtah.bean.$beanBean;
 /**
  * Created by $author on $date
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:
  */
-class $namePresenter : AacListPresenter<$nameActivity, String>() {
+class $namePresenter : AacListPresenter<$nameActivity, $beanBean>() {
     private var m$name: $nameViewModel? = null
     public override fun onCreate() {
         super.onCreate()

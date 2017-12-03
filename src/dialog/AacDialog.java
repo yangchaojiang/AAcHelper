@@ -15,6 +15,7 @@ public class AacDialog extends JDialog {
     private JComboBox aaViewType;
     private JTextField aacName;
     private JComboBox lanType;
+    private JTextField beanName;
     private DataListener listener;
 
     public AacDialog() {
@@ -50,7 +51,11 @@ public class AacDialog extends JDialog {
             Messages.showInfoMessage("名称好像啥也没填！", "提示");
             return;
         }
-        listener.selectValue(aacName.getText().trim(), lanType.getSelectedIndex(),aacTpye.getSelectedIndex(), aaViewType.getSelectedIndex());
+        if (aacTpye.getSelectedIndex()>0&&beanName.getText().trim().isEmpty()) {
+            Messages.showInfoMessage("Bean,好像啥也没填！", "提示");
+            return;
+        }
+        listener.selectValue(aacName.getText().trim(), beanName.getText().trim(),lanType.getSelectedIndex(),aacTpye.getSelectedIndex(), aaViewType.getSelectedIndex());
          dispose();
     }
 
@@ -61,7 +66,7 @@ public class AacDialog extends JDialog {
 
     public static void main(String[] args) {
         AacDialog dialog = new AacDialog();
-        dialog.setListener((msg,lanType, indexType, indexViewType) -> {
+        dialog.setListener((msg,bean,lanType, indexType, indexViewType) -> {
             Messages.showInfoMessage(msg, "提示");
         });
         dialog.pack();
@@ -78,7 +83,7 @@ public class AacDialog extends JDialog {
     }
 
     public interface DataListener {
-        void selectValue(String msg,  int lanType,int indexType, int indexViewType);
+        void selectValue(String msg, String nameName, int lanType,int indexType, int indexViewType);
 
     }
 }

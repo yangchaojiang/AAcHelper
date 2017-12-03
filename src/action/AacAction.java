@@ -6,9 +6,7 @@ import dialog.AacDialog;
 
 import java.io.File;
 
-/**
- * Created by FengTing on 2017/1/4.
- */
+
 public class AacAction extends AacBaseAction {
 
 
@@ -22,8 +20,8 @@ public class AacAction extends AacBaseAction {
     public void actionPerformed(AnActionEvent e) {
         super.actionPerformed(e);
         AacDialog dialog = new AacDialog();
-        dialog.setListener((msg, lanType,indexType, indexViewType) ->
-                selectIndex(e, msg,lanType, indexType, indexViewType)
+        dialog.setListener((msg, beanName,lanType,indexType, indexViewType) ->
+                selectIndex(e, msg,beanName,lanType, indexType, indexViewType)
         );
         dialog.pack();
         dialog.setVisible(true);
@@ -31,18 +29,9 @@ public class AacAction extends AacBaseAction {
 
 
 
-    private void selectIndex(AnActionEvent e, String msg, int lanType,int indexType, int indexViewType) {
+    private void selectIndex(AnActionEvent e, String msg,String beanName,int lanType,int indexType, int indexViewType) {
         String type;
         switch (indexType) {
-            case 0:
-                if (indexViewType == 0) {
-                    type = "Activity";
-                } else if (indexViewType == 1) {
-                    type = "Fragment";
-                } else {
-                    type = "Service";
-                }
-                break;
             case 1:
                 if (indexViewType == 0) {
                     type = "DataActivity";
@@ -71,16 +60,20 @@ public class AacAction extends AacBaseAction {
                 }
                 break;
         }
-        init(e, msg, type,lanType ,indexViewType);
+        init(e, msg, type,beanName,lanType ,indexViewType,indexType);
     }
 
-    private void init(AnActionEvent e, String name, String typeName,int lanType, int indexViewType) {
+    private void init(AnActionEvent e, String name, String typeName,String beanName,int lanType, int indexViewType,int indexType) {
         smallName = toUpperOrNot(name, false);
         bigname = toUpperOrNot(name, true);
+        if (beanName!=null&&!beanName.isEmpty()){
+            this.beanBean=toUpperOrNot(beanName, true);
+        }
         String s;
         String fileName = null;
         String presenterType;
         String viewModelType;
+        String beanNames;
         if (lanType==1){
             if (indexViewType == 0) {
                 s = "ActivityKt.txt";
@@ -93,6 +86,7 @@ public class AacAction extends AacBaseAction {
             }
             presenterType="PresenterKt.txt";
             viewModelType="ViewModelKt.txt";
+            beanNames="TestBeanKt.txt";
         }else {
             if (indexViewType == 0) {
                 s = "Activity.txt";
@@ -105,11 +99,15 @@ public class AacAction extends AacBaseAction {
             }
             presenterType="Presenter.txt";
             viewModelType="ViewModel.txt";
+            beanNames="TestBean.txt";
         }
         // 创建四个MVP
-        createFile(typeName, s, basePath + "/" + smallName + "/ui", bigname,lanType==0);
-        createFile(typeName, presenterType, basePath + "/" + smallName + "/presenter", bigname,lanType==0);
-        createFile("view", viewModelType, basePath + "/" + smallName + "/model", bigname,lanType==0);
+        createFile(typeName, s, basePath + "/" + smallName + "/ui",lanType==0);
+        createFile(typeName, presenterType, basePath + "/" + smallName + "/presenter",lanType==0);
+        createFile("view", viewModelType, basePath + "/" + smallName + "/model",lanType==0);
+        if (indexType>0){
+            createFile("bean", beanNames, basePath + "/" + smallName + "/bean",lanType==0);
+        }
         if (indexViewType != 2) {
             //写入layout 资源文件
             File layoutFile = new File(this.getClass().getResource("/Layout/" + fileName).getFile());
@@ -117,7 +115,7 @@ public class AacAction extends AacBaseAction {
             content = content.replace("$name", bigname);
             //大写转小写加下划线
             String sss = upperCharToUnderLine(smallName);
-            writetoFile(content, project.getBasePath() + "/app/src/main/res/layout",
+            writeToFile(content, project.getBasePath() + "/app/src/main/res/layout",
                     layoutFile.getName().replace(".txt", sss + ".xml"));
         }
         if (indexViewType == 0) {
@@ -131,9 +129,9 @@ public class AacAction extends AacBaseAction {
     }
 
   public static void main(String[] ags) {
-        String extendName = "tex.text2.ui";
-        String extendName2 = extendName.substring(0, extendName.lastIndexOf(".")).toLowerCase();
-        System.out.println("text:" + extendName2);
+     //   String extendName = "userbean";
+       // String extendName2 = extendName.substring(0, extendName.lastIndexOf(".")).toLowerCase();
+      //  System.out.println("text:" + toUpperOrNot(extendName,true));
     }
 
 }
