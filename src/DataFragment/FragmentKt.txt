@@ -15,7 +15,7 @@ import  kotlinx.android.synthetic.main.fragment_$smallName.*
  @RequiresPresenter($namePresenter::class)
  class $nameFragment : AacDataFragment<$namePresenter, String>() {
 
-     override fun getContentLayout(): Int = R.layout.fragment_$smallName
+     override fun getContentLayoutId(): Int = R.layout.fragment_$smallName
 
      override fun setData(data: String) {
 

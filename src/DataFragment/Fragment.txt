@@ -14,10 +14,10 @@ import $importPtah.presenter.$namePresenter;
 @RequiresPresenter($namePresenter.class)
 public class $nameFragment extends AacDataFragment<$namePresenter,String> {
 
-        @Override
-        public int getContentLayout() {
-            return R.layout.fragment_$smallName;
-        }
+       @Override
+        public int getContentLayoutId() { return R.layout.fragment_$smallName;  }
+
+
         @Override
         public void setData(@NonNull String data) {
 

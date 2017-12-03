@@ -20,10 +20,9 @@ public class $nameActivity extends AacDataActivity<$namePresenter, String> {
         Intent intent = new Intent(activity,$nameActivity.class);
         activity.startActivity(intent);
     }
-    @Override
-    public int getContentLayout() {
-        return R.layout.activity_$smallName;
-    }
+     @Override
+     public int getContentLayoutId() { return R.layout.activity_$smallName;  }
+
 
     @Override
     public void setData(@NonNull String data) {

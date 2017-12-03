@@ -16,7 +16,7 @@ import  kotlinx.android.synthetic.main.activity_$smallName.*
  @RequiresPresenter($namePresenter::class)
  class $nameActivity : AacDataActivity<$namePresenter, String>() {
 
-     override fun getContentLayout(): Int = R.layout.activity_$smallName
+     override fun getContentLayoutId():Int=  R.layout.activity_$smallName
 
      override fun setData(data: String) {
 
@@ -24,6 +24,7 @@ import  kotlinx.android.synthetic.main.activity_$smallName.*
      override fun setError(e: Throwable) {
 
      }
+
      companion object {
          fun startActivity(activity: Activity) {
              val intent = Intent(activity, $nameActivity::class.java)

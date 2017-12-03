@@ -17,13 +17,14 @@ import  kotlinx.android.synthetic.main.activity_$smallName.*
 @RequiresPresenter($namePresenter::class)
 class $nameActivity : AacActivity<$namePresenter>() {
 
+    override fun getContentLayoutId():Int=  R.layout.activity_$smallName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_$smallName)
+
     }
 
     companion object {
-
         fun startActivity(activity: Activity) {
             val intent = Intent(activity, $nameActivity::class.java)
             activity.startActivity(intent)

@@ -50,15 +50,6 @@ public abstract class AacBaseAction extends AnAction {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
-
-      /*  String name = Messages.showInputDialog(project, "起个名字，一定要吊炸天的名字！", "先想个名字",
-                Messages.getQuestionIcon());
-        if (name == null || name.trim().length() == 0) {
-            Messages.showInfoMessage(project, "好像啥也没填！！", "提示");
-            return;
-        }*/
-
-
     }
 
     /**
@@ -73,7 +64,7 @@ public abstract class AacBaseAction extends AnAction {
     /**
      * 检测大写
      *
-     * @param param
+     * @param param param
      ***/
     public static String upperCharToUnderLine(String param) {
         Pattern p = Pattern.compile("[A-Z]");
@@ -199,7 +190,7 @@ public abstract class AacBaseAction extends AnAction {
     }
 
     /**
-     * 流读出字节数组
+     * 读出字节数组
      *
      * @param inStream 输入流
      * @return byte[]

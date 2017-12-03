@@ -21,11 +21,12 @@ public class $nameActivity extends AacActivity<$namePresenter> {
         Intent intent = new Intent(activity,$nameActivity.class);
         activity.startActivity(intent);
     }
+     @Override
+     public int getContentLayoutId() { return R.layout.activity_$smallName;  }
 
      @Override
      protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_$smallName);
       }
 
 }
