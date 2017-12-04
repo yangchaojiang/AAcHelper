@@ -17,7 +17,6 @@ public class AacDialog extends JDialog {
     private JComboBox lanType;
     private JTextField beanName;
     private DataListener listener;
-
     public AacDialog() {
         setContentPane(contentPane);
         setModal(true);
@@ -28,7 +27,7 @@ public class AacDialog extends JDialog {
         int screenHeight = kit.getScreenSize().height; //获取屏幕的高
         this.setLocation(screenWidth / 2 - windowWidth / 2 - 200, screenHeight / 4 - windowHeight / 4);//设置窗口居中显示
         getRootPane().setDefaultButton(buttonOK);
-        setTitle("新建Aac，输入您的模块名称");
+        setTitle("输入您的模块名称");
         setSize(500, 300);
         buttonOK.addActionListener(e -> onOK());
         buttonCancel.addActionListener(e -> onCancel());
@@ -51,11 +50,15 @@ public class AacDialog extends JDialog {
             Messages.showInfoMessage("名称好像啥也没填！", "提示");
             return;
         }
+        if (aaViewType.getSelectedIndex()>1&&aacTpye.getSelectedIndex()>0){
+            Messages.showInfoMessage("Service只支持aac类型", "提示");
+            return;
+        }
         if (aacTpye.getSelectedIndex()>0&&beanName.getText().trim().isEmpty()) {
             Messages.showInfoMessage("Bean,好像啥也没填！", "提示");
             return;
         }
-        listener.selectValue(aacName.getText().trim(), beanName.getText().trim(),lanType.getSelectedIndex(),aacTpye.getSelectedIndex(), aaViewType.getSelectedIndex());
+       listener.selectValue(aacName.getText().trim(), beanName.getText().trim(),lanType.getSelectedIndex(),aacTpye.getSelectedIndex(),aaViewType.getSelectedIndex(),aaViewType.getSelectedItem().toString());
          dispose();
     }
 
@@ -66,7 +69,7 @@ public class AacDialog extends JDialog {
 
     public static void main(String[] args) {
         AacDialog dialog = new AacDialog();
-        dialog.setListener((msg,bean,lanType, indexType, indexViewType) -> {
+        dialog.setListener((msg,bean,lanType, indexType, indexViewType,indexViewName) -> {
             Messages.showInfoMessage(msg, "提示");
         });
         dialog.pack();
@@ -83,7 +86,7 @@ public class AacDialog extends JDialog {
     }
 
     public interface DataListener {
-        void selectValue(String msg, String nameName, int lanType,int indexType, int indexViewType);
+        void selectValue(String msg, String nameName, int lanType, int indexDataType, int indexViewType,String indexViewName);
 
     }
 }

@@ -1,39 +1,39 @@
-<idea-plugin>
-    <id>com.your.company.unique.plugin.id</id>
-    <name>AAcHelper</name>
-    <version>2.6.8</version>
-    <vendor email="yanchaojiang@outlook.com" url="https://github.com/yangchaojiang">YangJiang</vendor>
+<idea-plugin version="2">
+  <id>com.your.company.unique.plugin.id</id>
+  <name>AAcHelper</name>
+  <version>1.9.1</version>
+  <vendor email="yanchaojiang@outlook.com" url="https://github.com/yangchaojiang">YangJiang</vendor>
 
-    <description><![CDATA[
+  <description><![CDATA[
       Enter short description for your plugin here.<br>
       <em>most HTML tags may be used</em>
     ]]></description>
 
-    <change-notes><![CDATA[
+  <change-notes><![CDATA[
       Add change notes here.<br>
       <em>most HTML tags may be used</em>
     ]]>
-    </change-notes>
+  </change-notes>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="145.0"/>
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="145.0"/>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
-    <!-- uncomment to enable plugin in all products
-    <depends>com.intellij.modules.lang</depends>
-    -->
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
 
-    <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
-    </extensions>
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
 
-    <actions>
-        <!-- Add your actions here -->
-        <action id="aac.NewAacActivity" class="action.AacAction" text="NewAac" description="NewAacActivity"  >
-            <add-to-group group-id="NewGroup1" anchor="first"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt N"/>
-        </action>
-    </actions>
+  <actions>
+    <!-- Add your actions here -->
+    <action id="aac.NewAacActivity" class="action.AacAction" text="NewAac" description="NewAacActivity"  >
+      <add-to-group group-id="NewGroup" anchor="first"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt N"/>
+    </action>
+  </actions>
 
 </idea-plugin>
