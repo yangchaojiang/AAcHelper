@@ -12,7 +12,6 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import ${importJsonPath}.JsonCallback;
 <#if dataType == 2 >
-import java.util.ArrayList;
 import java.util.List;
 </#if>
 </#if>
@@ -42,7 +41,7 @@ public class ${name}ViewModel extends AacViewModel {
   }
 <#elseif dataType==2>
 private MutableLiveData<List<${beanBean}>> listData = new MutableLiveData<>();
-
+             TypeReference typeReference=new  TypeReference<${beanBean}>(){};
     public LiveData<List<${beanBean}>> getListData(Context context, String param,int page) {
       OkGo.<List<${beanBean}>>get("url")
          .tag(context)
