@@ -96,7 +96,7 @@
               <model>
                 <item value="Aac"/>
                 <item value="AacData"/>
-                <item value="AccList"/>
+                <item value="AacList"/>
               </model>
             </properties>
           </component>
