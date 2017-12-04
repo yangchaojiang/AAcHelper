@@ -2,10 +2,12 @@ package utils; /**
  * Created by yangc on 2017/12/3.
  */
 
+import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -45,6 +47,10 @@ public class FreeMarkerUtil {
     private int typeViewIndex;
     private String indexViewName;
     private int indexDataTye;
+    private String shili;
+    private  String importJsonPath ;
+    private  boolean isHttp ;
+    private  String emailName;
     public FreeMarkerUtil(AnActionEvent e) {
         VirtualFile file = DataKeys.VIRTUAL_FILE.getData(e.getDataContext());
         assert file != null;
@@ -58,6 +64,20 @@ public class FreeMarkerUtil {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
+        isHttp=PropertiesComponent.getInstance().getBoolean("isHttp");
+        if (isHttp) {
+            importJsonPath = PropertiesComponent.getInstance().getValue("importPath", "");
+            shili = PropertiesComponent.getInstance().getValue("shili", "");
+            if (PropertiesComponent.getInstance().getValue("importPath", "").isEmpty()) {
+                Messages.showInfoMessage("您路径为空,setting", "提示");
+                return;
+            }
+            if (PropertiesComponent.getInstance().getValue("shili", "").isEmpty()) {
+                Messages.showInfoMessage("构成函数没有填写,setting", "提示");
+            }
+        }
+        emailName=PropertiesComponent.getInstance().getValue("emailName","yangchaojiang@outlook.com");
+
     }
 
 
@@ -99,6 +119,7 @@ public class FreeMarkerUtil {
         int start = ss.indexOf(packageName);
         String extendName = toPath.substring(start + packageName.length()).replace("/", ".");
         String extendName2 = extendName.substring(0, extendName.lastIndexOf(".")).toLowerCase();
+
         Map<String, Object> root = new HashMap<>();
         root.put("packageName", packageName);
         root.put("date", getNowDateShort());
@@ -111,7 +132,12 @@ public class FreeMarkerUtil {
         root.put("viewIndex", typeViewIndex);
         root.put("viewName", indexViewName);
         root.put("dataType", indexDataTye);
+        root.put("importJsonPath", importJsonPath);
+        root.put("shili", shili);
+        root.put("isHttp", isHttp);
+        root.put("emailName",emailName);
         root.put("smallViewName", toUpperOrNot(indexViewName, false));
+
         Template template = cfg.getTemplate("/" + activity + "/" + name);
         if (name.contains("_.xml")) {
             buildTemplate(root, toPath, name.replace("ftl", "").replace("_", "_" + smallName), template);
@@ -133,12 +159,12 @@ public class FreeMarkerUtil {
         if (!floder.exists()) {
             boolean b = floder.mkdirs();
         } else {
-            //存在该布局文件就不文件操作
-            if (fileName.contains(".xml")) {
-                return;
-            }
         }
         File file = new File(filepath + "/" + fileName);
+        //存在该布局文件就不文件操作
+        if (file.exists()&&fileName.contains(".xml")) {
+            return;
+        }
         try {
             Writer out = new OutputStreamWriter(new FileOutputStream(
                     file), "UTF-8");

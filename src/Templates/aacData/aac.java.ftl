@@ -8,8 +8,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import com.aac.expansion.data.AacDataActivity;
+
 <#elseif viewIndex==1>
+
 import com.aac.expansion.data.AacDataFragment;
+
 <#else>
 import android.content.Context;
 import android.content.Intent;

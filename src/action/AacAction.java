@@ -37,7 +37,7 @@ public class AacAction extends AnAction {
                         event = e;
                         freeMarkerUtil.setTypeViewIndex(indexViewType);
                         freeMarkerUtil.setIndexViewName(indexViewName);
-                        freeMarkerUtil.setTypeViewIndex(indexType);
+                        freeMarkerUtil.setIndexDataTye(indexType);
                         selectIndex(name, beanName, lanType, indexType);
                     } catch (IOException e1) {
                         e1.printStackTrace();

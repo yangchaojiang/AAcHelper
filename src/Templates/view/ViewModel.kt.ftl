@@ -2,7 +2,7 @@
 
 import com.aac.module.model.AacViewModel
 
-
+<#if  isHttp>
 <#if dataType gt 0 >
 import ${importPtah}.bean.${beanBean};
 import android.app.Application
@@ -11,13 +11,15 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.content.Context
 import com.alibaba.fastjson.TypeReference
-import com.example.aac.utils.JsonCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
+import ${importJsonPath}
+</#if>
 </#if>
 <#include "../commnt/file_header_info.ftl">
 
 class ${name}ViewModel : AacViewModel() {
+<#if isHttp>
 <#if dataType==1>
     fun getDatas(context: Context, param: String): LiveData<${beanBean}> {
     OkGo.get<${beanBean}>("url").tag(context)
@@ -35,7 +37,6 @@ class ${name}ViewModel : AacViewModel() {
                     return liveData
      }
 <#elseif dataType==2>
-   
     private val listData = MutableLiveData<List<${beanBean}>>()
     fun getListData(context: Context, param: String, page: Int): LiveData<List<${beanBean}>> {
       val typeReference = object : TypeReference<${beanBean}>(){}
@@ -55,10 +56,9 @@ class ${name}ViewModel : AacViewModel() {
        })
     return listData
     }
-
 <#else >
 
-
+</#if>
 </#if>
     override fun onCleared() {
         super.onCleared()

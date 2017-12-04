@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.your.company.unique.plugin.id</id>
   <name>AAcHelper</name>
-  <version>1.9.1</version>
+  <version>1.9.9</version>
   <vendor email="yanchaojiang@outlook.com" url="https://github.com/yangchaojiang">YangJiang</vendor>
 
   <description><![CDATA[
@@ -35,5 +35,7 @@
       <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt N"/>
     </action>
   </actions>
-
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationConfigurable instance="dialog.SettingsUI" displayName="AacSetting"/>
+  </extensions>
 </idea-plugin>
