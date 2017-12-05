@@ -4,9 +4,7 @@ import com.aac.module.model.AacViewModel
 
 <#if  isHttp>
 <#if dataType gt 0 >
-import ${importPtah}.bean.${beanBean};
-import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
+import ${importPtah}.bean.${beanBean}
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.content.Context
@@ -21,7 +19,9 @@ import ${importJsonPath}
 class ${name}ViewModel : AacViewModel() {
 <#if isHttp>
 <#if dataType==1>
-    fun getDatas(context: Context, param: String): LiveData<${beanBean}> {
+    private val liveData = MutableLiveData<${beanBean}>()
+
+    fun getData(context: Context, param: String): LiveData<${beanBean}> {
     OkGo.get<${beanBean}>("url").tag(context)
         .params("param", param)
         .execute(object : JsonCallback<${beanBean}>("s", ${beanBean}::class.java) {
@@ -38,21 +38,22 @@ class ${name}ViewModel : AacViewModel() {
      }
 <#elseif dataType==2>
     private val listData = MutableLiveData<List<${beanBean}>>()
-    fun getListData(context: Context, param: String, page: Int): LiveData<List<${beanBean}>> {
-      val typeReference = object : TypeReference<${beanBean}>(){}
-      OkGo.get<List<${beanBean}>>("url")
-       .tag(context)
-       .params("param", param)
-       .params("page", page)
-       .execute(object : JsonCallback<List<${beanBean}>>("key", typeReference.type) {
-           override fun onSuccess(response: Response<List<${beanBean}>>) {
-            listData.value = response.body()
-             }
 
-            override fun onError(response: Response<List<${beanBean}>>) {
-              super.onError(response)
-              listData.value = null
-            }
+    fun getListData(context: Context, param: String, page: Int): LiveData<List<${beanBean}>> {
+       val typeReference = object : TypeReference<${beanBean}>(){}
+       OkGo.get<List<${beanBean}>>("url")
+           .tag(context)
+           .params("param", param)
+           .params("page", page)
+           .execute(object : JsonCallback<List<${beanBean}>>("key", typeReference.type) {
+               override fun onSuccess(response: Response<List<${beanBean}>>) {
+                   listData.value = response.body()
+                }
+
+                override fun onError(response: Response<List<${beanBean}>>) {
+                    super.onError(response)
+                    listData.value = null
+                }
        })
     return listData
     }

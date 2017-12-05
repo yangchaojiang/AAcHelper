@@ -29,8 +29,7 @@ class ${name}Presenter : <#if viewIndex==0> AacDataAPresenter <#else>AacDataFPre
          getData()
      }
      fun getData() {
-       m${name}.getData(getView(),"id").observe(getView(), getDataSubscriber())
-
+       m${name}?.getData(view,"id")?.observe(view, dataSubscriber)
      }
 
 <#if viewIndex==1>

@@ -21,7 +21,7 @@ class ${name}Presenter : <#if viewIndex==0>AacListPresenter<#elseif viewIndex==1
     }
 
     override fun setLoadData(pager: Int) {
-             m${name}.getListData(getView(),"id",pager).observe(getView(),getDataSubscriber());
+             m${name}?.getListData(view"id",pager)?.observe(view,dataSubscriber);
     }
 <#if viewIndex==1>
      override fun onCreateView() {
