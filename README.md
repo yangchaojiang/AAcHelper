@@ -9,7 +9,7 @@
      
 
 ### 安装插件 
- 1.下载[AAcHelper.jar](https://github.com/yangchaojiang/AAcHelper/blob/master/AAcHelper.jar)
+ 1.下载[AAcHelper.jar](https://github.com/yangchaojiang/AAcHelper/blob/master/AAcHelper.zip)
  2.打开你Android studio  安装插件
  
  安装如图
