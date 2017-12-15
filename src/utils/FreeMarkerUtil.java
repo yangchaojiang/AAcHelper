@@ -275,8 +275,9 @@ public class FreeMarkerUtil {
                 } else {
                     Element methodElement = doc.createElement("activity");
                     methodElement.setAttribute("android:name", activity);
-                    methodElement.setAttribute("android:configChanges", "orientation|keyboardHidden");
-                    methodElement.setAttribute("android:windowSoftInputMode", "adjustPan|stateHidden");
+                    methodElement.setAttribute("android:launchMode", "singleTop");
+                    methodElement.setAttribute("android:screenOrientation", "portrait");
+                    methodElement.setAttribute("android:windowSoftInputMode", "adjustResize|stateHidden");
                     elem.appendChild(methodElement);
                 }
                 break;
