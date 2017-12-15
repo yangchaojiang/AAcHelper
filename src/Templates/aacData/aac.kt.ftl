@@ -43,6 +43,17 @@ import ${importPtah}.bean.${beanBean};
              activity.startActivity(intent)
          }
      }
+<#elseif viewIndex==1>
+    companion object {
+          fun getInstance(param: String): ${name}${viewName} {
+              val fragment = ${name}${viewName}()
+              val bundle = Bundle()
+              bundle.putString("param", param)
+              fragment.arguments = bundle
+              return fragment
+          }
+    }
 </#if>
+
  }
 

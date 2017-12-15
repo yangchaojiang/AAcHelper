@@ -48,10 +48,18 @@ class ${name}${viewName} : Aac${viewName}<${name}Presenter>() {
     override fun getContentLayoutId():Int=  R.layout.${smallViewName}_${smallName}
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-
     super.onViewCreated(view, savedInstanceState)
 
      }
+    companion object {
+        fun getInstance(param: String): ${name}${viewName} {
+            val fragment = ${name}${viewName}()
+            val bundle = Bundle()
+            bundle.putString("param", param)
+            fragment.arguments = bundle
+            return fragment
+         }
+    }
 <#else >
     override fun onBind(intent: Intent?): IBinder? {
     return super.onBind(intent)

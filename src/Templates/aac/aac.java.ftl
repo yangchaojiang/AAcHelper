@@ -43,6 +43,13 @@ public class ${name}${viewName} extends Aac${viewName}<${name}Presenter> {
     @Override
     public int getContentLayoutId() { return R.layout.fragment_${smallName};  }
 
+    public ${name}${viewName}  getInstance(@NonNUll String param){
+           ${name}${viewName}  fragment=new ${name}${viewName}();
+           Bundle  mBundle=new Bundle();
+           mBundle.putString("param",param);
+           fragment.setArguments(mBundle);
+           return mBundle;
+     }
 <#else>
     public static void startService(Context context) {
     Intent intent = new Intent(context,${name}Service.class);

@@ -35,7 +35,15 @@ public class ${name}${viewName} extends AacData${viewName}<${name}Presenter, ${b
         Intent intent = new Intent(activity,${name}Activity.class);
         activity.startActivity(intent);
     }
+<#elseif viewIndex==1>
 
+    public ${name}${viewName}  getInstance(@NonNUll String param){
+         ${name}${viewName}  fragment=new ${name}${viewName}();
+         Bundle  mBundle=new Bundle();
+         mBundle.putString("param",param);
+         fragment.setArguments(mBundle);
+         return mBundle;
+}
 </#if>
    @Override
    public int getContentLayoutId() { return R.layout.${smallViewName}_${smallName};  }

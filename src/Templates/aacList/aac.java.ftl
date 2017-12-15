@@ -41,6 +41,14 @@ public class ${name}${viewName} extends AacList${viewName}<${name}Presenter, ${b
     super.onViewCreated(view, savedInstanceState);
     //setStartLoadMore(true);
     }
+
+    public ${name}${viewName}  getInstance(@NonNUll String param){
+          ${name}${viewName}  fragment=new ${name}${viewName}();
+          Bundle  mBundle=new Bundle();
+          mBundle.putString("param",param);
+          fragment.setArguments(mBundle);
+          return mBundle;
+}
 </#if>
      @Override
      public int setGridSpanCount() {

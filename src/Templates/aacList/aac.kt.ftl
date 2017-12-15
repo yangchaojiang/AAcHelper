@@ -36,6 +36,15 @@ import  kotlinx.android.synthetic.main.${smallViewName}_${smallName}.*
        super.onViewCreated(view, savedInstanceState)
        //setStartLoadMore(true);
       }
+    companion object {
+         fun getInstance(param: String): ${name}${viewName} {
+             val fragment = ${name}${viewName}()
+             val bundle = Bundle()
+             bundle.putString("param", param)
+             fragment.arguments = bundle
+             return fragment
+         }
+    }
 </#if>
      override fun convertViewHolder(helper: BaseViewHolder, item: ${beanBean}) {
          // helper.setText(android.R.id.text1, item)
