@@ -3,6 +3,7 @@
 <#if viewIndex==0>
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import com.aac.expansion.list.AacListActivity
 <#elseif viewIndex==1>
 import android.view.View
