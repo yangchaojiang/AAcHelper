@@ -8,10 +8,7 @@ import ${importPtah}.bean.${beanBean}
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.content.Context
-import com.alibaba.fastjson.TypeReference
 import com.lzy.okgo.OkGo
-import com.lzy.okgo.model.Response
-import ${importJsonPath}
 </#if>
 </#if>
 <#include "../commnt/file_header_info.ftl">
@@ -19,44 +16,29 @@ import ${importJsonPath}
 class ${name}ViewModel : AacViewModel() {
 <#if isHttp>
 <#if dataType==1>
-    private val liveData = MutableLiveData<${beanBean}>()
-
+    private var liveData : LiveData<${beanBean}>?=null
     fun getData(context: Context, param: String): LiveData<${beanBean}> {
-    OkGo.get<${beanBean}>("url").tag(context)
-        .params("param", param)
-        .execute(object : JsonCallback<${beanBean}>("s", ${beanBean}::class.java) {
-            override fun onSuccess(response: Response<${beanBean}>) {
-                liveData.value = response.body()
-                }
-
-                override fun onError(response: Response<${beanBean}>) {
-                    super.onError(response)
-                    liveData.value = null
-                    }
-                    })
-                    return liveData
-     }
-<#elseif dataType==2>
-    private val listData = MutableLiveData<List<${beanBean}>>()
-
-    fun getListData(context: Context, param: String, page: Int): LiveData<List<${beanBean}>> {
-       val typeReference = object : TypeReference<${beanBean}>(){}
-       OkGo.get<List<${beanBean}>>("url")
+       if (listData == null) {
+           listData = OkGo.get<${beanBean}>>(url)
            .tag(context)
-           .params("param", param)
-           .params("page", page)
-           .execute(object : JsonCallback<List<${beanBean}>>("key", typeReference.type) {
-               override fun onSuccess(response: Response<List<${beanBean}>>) {
-                   listData.value = response.body()
-                }
-
-                override fun onError(response: Response<List<${beanBean}>>) {
-                    super.onError(response)
-                    listData.value = null
-                }
-       })
-    return listData
+           .params("param",param)
+           .converter(BeanConverter("key", ${beanBean}::class.java))
+           .adapt(LiveDataAdapter())
+       }
+      return listData
     }
+<#elseif dataType==2>
+     private var listData : LiveData<List<${beanBean}>>?=null
+     fun getListData(context: Context, param: String, page: Int): LiveData<List<${beanBean}>>? {
+        if (listData == null) {
+            listData = OkGo.get<List<${beanBean}>>(url)
+            .tag(context)
+            .params("param",param)
+            .converter(BeanListConverters("key", ${beanBean}::class.java))
+            .adapt(LiveDataAdapter())
+          }
+      return listData
+     }
 <#else >
 
 </#if>

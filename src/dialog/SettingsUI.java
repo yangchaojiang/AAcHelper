@@ -16,6 +16,8 @@ public class SettingsUI implements Configurable {
     private JPanel jPanel;
     private JCheckBox checkBox1;
     private JTextField emailHint;
+    private JTextField textField3;
+    private JTextField textField4;
 
     @Nls
     @Override
@@ -61,7 +63,8 @@ public class SettingsUI implements Configurable {
          }
         PropertiesComponent.getInstance().setValue("emailName",emailHint.getText());
         PropertiesComponent.getInstance().setValue("isHttp",isHttp);
-        Messages.showInfoMessage("OK", "提示");
+        Messages.showInfoMessage("OK" +
+                "", "提示");
     }
 
     @Override

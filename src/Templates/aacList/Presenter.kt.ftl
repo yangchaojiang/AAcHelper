@@ -14,23 +14,24 @@ import ${importPtah}.bean.${beanBean};
 <#include "../commnt/file_header_info.ftl">
 
 class ${name}Presenter : <#if viewIndex==0>AacListPresenter<#elseif viewIndex==1>AacListFragmentPresenter</#if><${name}${viewName}, ${beanBean}> (){
-    private var m${name}: ${name}ViewModel? = null
+    private lateinit var m${name}: ${name}ViewModel
     public override fun onCreate() {
         super.onCreate()
         m${name} = getViewModel(${name}ViewModel::class.java)
     }
-
+<#if viewIndex==0>
     override fun setLoadData(pager: Int) {
-             m${name}?.getListData(view.context,"id",pager)?.observe(view,dataSubscriber);
+             m${name}.getListData(view,"param",pager)?.observe(view,dataSubscriber);
     }
-<#if viewIndex==1>
-     override fun onCreateView() {
-      super.onCreateView()
-      }
+<#elseif  viewIndex==1>
+
 
       override fun lazyLoad() {
-     //m$name.getData().observe(getView(),getDataSubscriber());
-    }
+
+      }
+     override fun setLoadData(pager: Int) {
+           m${name}.getListData(view.context,"param",pager).observe(view,dataSubscriber);
+      }
 </#if>
     companion object {
         val TAG = ${name}Presenter::class.java.name

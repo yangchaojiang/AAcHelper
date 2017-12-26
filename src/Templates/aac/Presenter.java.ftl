@@ -26,9 +26,5 @@ public class ${name}Presenter extends AacPresenter<${name}${viewName}> {
         m${name} = getViewModel(${name}ViewModel.class);
     }
 
-    @Override
-    protected void onCreateView() {
-        super.onCreateView();
-    }
 
 }

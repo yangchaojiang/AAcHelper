@@ -26,10 +26,7 @@ public class ${name}Presenter extends <#if viewIndex==0>AacListPresenter<#elseif
      }
 <#if viewIndex==1>
 
-      @Override
-      protected void onCreateView() {
-      super.onCreateView();
-      }
+
      @Override
      protected void lazyLoad() {
      //m$name.getData().observe(getView(),getDataSubscriber());

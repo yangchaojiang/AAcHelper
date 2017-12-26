@@ -21,15 +21,12 @@ import ${importPtah}.ui.${name}${viewName}
     class ${name}Presenter : AacPresenter<${name}Service>() {
 </#if>
 
-    private var m${name}: ${name}ViewModel? = null
+    private lateinit var m${name}: ${name}ViewModel
     public override fun onCreate() {
         super.onCreate()
         m${name} = getViewModel(${name}ViewModel::class.java)
     }
 
-    override fun onCreateView() {
-        super.onCreateView()
-    }
 
     companion object {
         val TAG = ${name}Presenter::class.java.name

@@ -15,7 +15,7 @@ import ${importPtah}.bean.${beanBean}
 
 class ${name}Presenter : <#if viewIndex==0> AacDataAPresenter <#else>AacDataFPresenter</#if><${name}${viewName},${beanBean}> () {
 
-    private var m${name}: ${name}ViewModel? = null
+    private lateinit var m${name}: ${name}ViewModel
 
     public override fun onCreate() {
         super.onCreate()
@@ -29,7 +29,7 @@ class ${name}Presenter : <#if viewIndex==0> AacDataAPresenter <#else>AacDataFPre
          getData()
      }
      fun getData() {
-       m${name}?.getData(view.context,"id")?.observe(view, dataSubscriber)
+       m${name}.getData(view.context,"id").observe(view, dataSubscriber)
      }
 
 <#if viewIndex==1>

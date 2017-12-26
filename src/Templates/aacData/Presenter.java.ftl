@@ -24,9 +24,7 @@ public class ${name}Presenter extends <#if viewIndex==0> AacDataAPresenter <#els
     m${name} = getViewModel(${name}ViewModel.class);
   }
    @Override
-   protected void onCreateView() {
-     super.onCreateView();
-    }
+
      @Override
     public void retryData() {
          getData();
