@@ -2,6 +2,7 @@ package utils; /**
  * Created by yangc on 2017/12/3.
  */
 
+import bean.DialogValueBean;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataKeys;
@@ -43,14 +44,11 @@ public class FreeMarkerUtil {
     private String bigname;
     private String userName;
     private String basePath;
-    private String beanBean;
-    private int typeViewIndex;
-    private String indexViewName;
-    private int indexDataTye;
     private String shili;
-    private  String importJsonPath ;
-    private  boolean isHttp ;
-    private  String emailName;
+    private String importJsonPath;
+    private String emailName;
+    private DialogValueBean valueBean;
+
     public FreeMarkerUtil(AnActionEvent e) {
         VirtualFile file = DataKeys.VIRTUAL_FILE.getData(e.getDataContext());
         assert file != null;
@@ -64,19 +62,8 @@ public class FreeMarkerUtil {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
-        isHttp=PropertiesComponent.getInstance().getBoolean("isHttp");
-        if (isHttp) {
-            importJsonPath = PropertiesComponent.getInstance().getValue("importPath", "");
-            shili = PropertiesComponent.getInstance().getValue("shili", "");
-            if (PropertiesComponent.getInstance().getValue("importPath", "").isEmpty()) {
-                Messages.showInfoMessage("您路径为空,setting", "提示");
-                return;
-            }
-            if (PropertiesComponent.getInstance().getValue("shili", "").isEmpty()) {
-                Messages.showInfoMessage("构成函数没有填写,setting", "提示");
-            }
-        }
-        emailName=PropertiesComponent.getInstance().getValue("emailName","yangchaojiang@outlook.com");
+
+        emailName = PropertiesComponent.getInstance().getValue("emailName", "yangchaojiang@outlook.com");
 
     }
 
@@ -89,6 +76,20 @@ public class FreeMarkerUtil {
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
     }
 
+    public void setSS() {
+        boolean is = valueBean.isHttp();
+        if (is) {
+            importJsonPath = PropertiesComponent.getInstance().getValue("importPath", "");
+            shili = PropertiesComponent.getInstance().getValue("shili", "");
+            if (PropertiesComponent.getInstance().getValue("importPath", "").isEmpty()) {
+                Messages.showInfoMessage("您路径为空,setting", "提示");
+                return;
+            }
+            if (PropertiesComponent.getInstance().getValue("shili", "").isEmpty()) {
+                Messages.showInfoMessage("构成函数没有填写,setting", "提示");
+            }
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -115,6 +116,7 @@ public class FreeMarkerUtil {
      * @param toPath   路径
      */
     public void createFiles(String activity, String name, String toPath) throws IOException {
+        setSS();
         String ss = toPath.replace("/", ".");
         int start = ss.indexOf(packageName);
         String extendName = toPath.substring(start + packageName.length()).replace("/", ".");
@@ -127,25 +129,27 @@ public class FreeMarkerUtil {
         root.put("name", bigname);
         root.put("author", userName);
         root.put("extendName", extendName);
-        root.put("beanBean", beanBean);
+        root.put("beanBean",  toUpperOrNot(valueBean.getBeanName(), true));
         root.put("importPtah", packageName + extendName2);
-        root.put("viewIndex", typeViewIndex);
-        root.put("viewName", indexViewName);
-        root.put("dataType", indexDataTye);
+        root.put("viewIndex", valueBean.getIndexViewType());
+        root.put("viewName", valueBean.getIndexViewName());
+        root.put("dataType", valueBean.getIndexDataType());
         root.put("importJsonPath", importJsonPath);
         root.put("shili", shili);
-        root.put("isHttp", isHttp);
-        root.put("emailName",emailName);
-        root.put("smallViewName", toUpperOrNot(indexViewName, false));
+        root.put("isHttp", valueBean.isHttp());
+        root.put("emailName", emailName);
+        root.put("rxType", valueBean.getRxIndex());
+        root.put("beanKey", valueBean.getKeyName());
+        root.put("smallViewName", toUpperOrNot(valueBean.getIndexViewName(), false));
 
         Template template = cfg.getTemplate("/" + activity + "/" + name);
         if (name.contains("_.xml")) {
             buildTemplate(root, toPath, name.replace("ftl", "").replace("_", "_" + smallName), template);
         } else {
             if (activity.equals("bean")) {
-                buildTemplate(root, toPath, beanBean + name.replace("TestBean", "").replace("ftl", ""), template);
+                buildTemplate(root, toPath,  toUpperOrNot(valueBean.getBeanName(), true) + name.replace("TestBean", "").replace("ftl", ""), template);
             } else {
-                buildTemplate(root, toPath, bigname + name.replace("ftl", "").replace("aac", indexViewName), template);
+                buildTemplate(root, toPath, bigname + name.replace("ftl", "").replace("aac", valueBean.getIndexViewName()), template);
             }
         }
     }
@@ -162,7 +166,7 @@ public class FreeMarkerUtil {
         }
         File file = new File(filepath + "/" + fileName);
         //存在该布局文件就不文件操作
-        if (file.exists()&&fileName.contains(".xml")) {
+        if (file.exists() && fileName.contains(".xml")) {
             return;
         }
         try {
@@ -371,35 +375,8 @@ public class FreeMarkerUtil {
     }
 
 
-    public void setTypeViewIndex(int typeViewIndex) {
-        this.typeViewIndex = typeViewIndex;
+    public void setValueBean(DialogValueBean valueBean) {
+        this.valueBean = valueBean;
     }
 
-    public String getBeanBean() {
-        return beanBean;
-    }
-
-    public void setBeanBean(String beanBean) {
-        this.beanBean = beanBean;
-    }
-
-    public void setIndexViewName(String indexViewName) {
-        this.indexViewName = indexViewName;
-    }
-
-    public int getTypeViewIndex() {
-        return typeViewIndex;
-    }
-
-    public String getIndexViewName() {
-        return indexViewName;
-    }
-
-    public int getIndexDataTye() {
-        return indexDataTye;
-    }
-
-    public void setIndexDataTye(int indexDataTye) {
-        this.indexDataTye = indexDataTye;
-    }
 }

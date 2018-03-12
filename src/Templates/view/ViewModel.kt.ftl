@@ -5,8 +5,14 @@ import com.aac.module.model.AacViewModel
 <#if  isHttp>
 <#if dataType gt 0 >
 import ${importPtah}.bean.${beanBean}
+<#if rxType==1>
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+<#elseif rxType==2>
+import io.reactivex.Flowable
+ <#else >
+
+ </#if>
+
 import android.content.Context
 import com.lzy.okgo.OkGo
 </#if>
@@ -16,29 +22,46 @@ import com.lzy.okgo.OkGo
 class ${name}ViewModel : AacViewModel() {
 <#if isHttp>
 <#if dataType==1>
-    private var liveData : LiveData<${beanBean}>?=null
+<#if rxType==0>
     fun getData(context: Context, param: String): LiveData<${beanBean}> {
-       if (listData == null) {
-           listData = OkGo.get<${beanBean}>>(url)
+           return OkGo.get<${beanBean}>>(url)
            .tag(context)
            .params("param",param)
-           .converter(BeanConverter("key", ${beanBean}::class.java))
+           .converter(BeanConverter("${beanKey}", ${beanBean}::class.java))
            .adapt(LiveDataAdapter())
-       }
-      return listData
     }
+  <#elseif rxType==1>
+       fun getData(context: Context, bbsId: String): Flowable<${beanBean}> {
+           return OkGo.get<${beanBean}>(HttpNames.bbsInfo)
+                   .tag(context)
+                   .params("bbsId", bbsId)
+                   .converter(BeanConverter("${beanKey}", ${beanBean}::class.java))
+                   .adapt(RxDataAdapter<${beanBean}>())
+                   .compose(defaultSchedulers())
+  <#else >
+
+ </#if>
 <#elseif dataType==2>
-     private var listData : LiveData<List<${beanBean}>>?=null
-     fun getListData(context: Context, param: String, page: Int): LiveData<List<${beanBean}>>? {
-        if (listData == null) {
-            listData = OkGo.get<List<${beanBean}>>(url)
+<#if rxType==0>
+      fun getListData(context: Context, param: String): LiveData<List<${beanBean}>> {
+           return OkGo.get<List<${beanBean}>>(url)
             .tag(context)
             .params("param",param)
-            .converter(BeanListConverters("key", ${beanBean}::class.java))
+            .converter(BeanListConverters("${beanKey}", ${beanBean}::class.java))
             .adapt(LiveDataAdapter())
-          }
-      return listData
-     }
+      }
+       <#elseif rxType==1>
+           fun getListData(context: Context, param: String): Flowable<List<${beanBean}>> {
+                  return OkGo.get<List<${beanBean}>>(url)
+                   .tag(context)
+                   .params("param",param)
+                   .converter(BeanListConverters("${beanKey}", ${beanBean}::class.java))
+                   .adapt(RxDataAdapter())
+                   .compose(defaultSchedulers())
+            }
+        <#else >
+
+        </#if>
 <#else >
 
 </#if>

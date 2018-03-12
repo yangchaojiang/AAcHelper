@@ -1,5 +1,6 @@
 package action;
 
+import bean.DialogValueBean;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -32,13 +33,13 @@ public class AacAction extends AnAction {
         e.getPresentation().setIcon(AllIcons.General.Add);
         freeMarkerUtil = new FreeMarkerUtil(e);
         AacDialog dialog = new AacDialog();
-        dialog.setListener((name, beanName, lanType, indexType, indexViewType, indexViewName) -> {
+        dialog.setListener(bean -> {
                     try {
                         event = e;
-                        freeMarkerUtil.setTypeViewIndex(indexViewType);
-                        freeMarkerUtil.setIndexViewName(indexViewName);
-                        freeMarkerUtil.setIndexDataTye(indexType);
-                        selectIndex(name, beanName, lanType, indexType);
+                        freeMarkerUtil.setValueBean(bean);
+                        freeMarkerUtil.setSmallName(freeMarkerUtil.toUpperOrNot(bean.getName(), false));
+                        freeMarkerUtil.setBigname(freeMarkerUtil.toUpperOrNot(bean.getName(), true));
+                        selectIndex(bean);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                         System.err.print(":" + e1.getMessage());
@@ -50,30 +51,25 @@ public class AacAction extends AnAction {
         dialog.setVisible(true);
     }
 
-    private void selectIndex(String msg, String beanName, int lanType, int indexDataType) throws IOException {
+    private void selectIndex(DialogValueBean bean) throws IOException {
         String type;
-        if (indexDataType == 0) {
+        if (bean.getIndexDataType() == 0) {
             type = "aac";
-        } else if (indexDataType == 1) {
+        } else if (bean.getIndexDataType() == 1) {
             type = "aacData";
         } else {
             type = "aacList";
         }
-        init(msg, type, beanName, lanType,indexDataType);
+        init(bean, type);
     }
 
-    private void init(String name, String typeName, String beanName, int lanType, int indexType) throws IOException {
-        freeMarkerUtil.setSmallName(freeMarkerUtil.toUpperOrNot(name, false));
-        freeMarkerUtil.setBigname(freeMarkerUtil.toUpperOrNot(name, true));
-        if (beanName != null && !beanName.isEmpty()) {
-            freeMarkerUtil.setBeanBean(freeMarkerUtil.toUpperOrNot(beanName, true));
-        }
+    private void init(DialogValueBean bean, String typeName) throws IOException {
         String s;
         String fileName;
         String presenterType;
         String viewModelType;
         String beanNames;
-        if (lanType == 1) {
+        if (bean.getLanType() == 1) {
             s = "aac.kt.ftl";
             presenterType = "Presenter.kt.ftl";
             viewModelType = "ViewModel.kt.ftl";
@@ -91,19 +87,19 @@ public class AacAction extends AnAction {
         freeMarkerUtil.createFiles(typeName, s, basePath + "/" + smallName + "/ui");
         freeMarkerUtil.createFiles(typeName, presenterType, basePath + "/" + smallName + "/presenter");
         freeMarkerUtil.createFiles("view", viewModelType, basePath + "/" + smallName + "/model");
-        if (indexType > 0) {
+        if (bean.getIndexDataType() > 0) {
             freeMarkerUtil.createFiles("bean", beanNames, basePath + "/" + smallName + "/bean");
         }
-        if (freeMarkerUtil.getTypeViewIndex()  != 2) {
+        if (bean.getIndexViewType() != 2) {
             //写入layout 资源文件
-            if (freeMarkerUtil.getTypeViewIndex() == 0) {
+            if (bean.getIndexViewType() == 0) {
                 fileName = "activity_.xml.ftl";
             } else {
                 fileName = "fragment_.xml.ftl";
             }
             freeMarkerUtil.createFiles("Layout", fileName, freeMarkerUtil.getProject().getBasePath() + "/app/src/main/res/layout");
         }
-        if (freeMarkerUtil.getTypeViewIndex()  == 0) {
+        if (bean.getIndexViewType() == 0) {
             //写入Manfast
             String ss = basePath.replace("/", ".");
             int i = ss.indexOf(freeMarkerUtil.getPackageName());
