@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 <#if viewIndex==0>
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import com.aac.expansion.data.AacDataActivity;
 
 <#elseif viewIndex==1>
