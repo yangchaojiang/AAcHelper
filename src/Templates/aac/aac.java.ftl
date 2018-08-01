@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import com.aac.module.ui.AacActivity;
 <#elseif viewIndex==1>
 import com.aac.module.ui.AacFragment;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 <#else>
 import android.content.Context;
 import android.content.Intent;
@@ -43,12 +45,12 @@ public class ${name}${viewName} extends Aac${viewName}<${name}Presenter> {
     @Override
     public int getContentLayoutId() { return R.layout.fragment_${smallName};  }
 
-    public ${name}${viewName}  getInstance(@NonNUll String param){
+    public ${name}${viewName}  getInstance(@NonNull String param){
            ${name}${viewName}  fragment=new ${name}${viewName}();
            Bundle  mBundle=new Bundle();
            mBundle.putString("param",param);
            fragment.setArguments(mBundle);
-           return mBundle;
+           return fragment;
      }
 <#else>
     public static void startService(Context context) {

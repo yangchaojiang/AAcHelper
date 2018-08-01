@@ -3,7 +3,7 @@
 
 <#if viewIndex==0>
 <#if rxType==0>
-import com.aac.expansion.list.AacListPresenter
+import com.aac.expansion.list.AacListAPresenter
 <#elseif rxType==1>
 import com.aac.module.rx2.presenter.list.AacRxListAPresenter
  <#else>
@@ -12,7 +12,7 @@ import com.aac.module.rx2.presenter.list.AacRxListAPresenter
 
 <#elseif viewIndex==1>
 <#if rxType==0>
-import com.aac.expansion.list.AacListFragmentPresenter
+import com.aac.expansion.list.AacListFPresenter
 <#elseif rxType==1>
 import com.aac.module.rx2.presenter.list.AacRxListFPresenter
  <#else>
@@ -26,16 +26,20 @@ import ${importPtah}.bean.${beanBean};
 
 <#include "../commnt/file_header_info.ftl">
 
-class ${name}Presenter : <#if viewIndex==0>Aac<#if rxType==1>Rx</#if>ListAPresenter<#elseif viewIndex==1>Aac<#if rxType==1>Rx</#if>ListFragmentPresenter</#if><${name}${viewName}, ${beanBean}> (){
+class ${name}Presenter : <#if viewIndex==0>Aac<#if rxType==1>Rx</#if>ListAPresenter<#elseif viewIndex==1>Aac<#if rxType==1>Rx</#if>ListFPresenter</#if><${name}${viewName}, ${beanBean}> (){
     private lateinit var m${name}: ${name}ViewModel
     public override fun onCreate() {
         super.onCreate()
         m${name} = getViewModel(${name}ViewModel::class.java)
-        m${name}.getListData(view,"param")?.observe(view,dataSubscriber);
-    }
-<#if viewIndex==0>
-
+   <#if viewIndex==0>
+    <#if rxType==0>
+              m${name}.getListData(view,"param").observe(view,dataSubscriber);
+    <#elseif rxType==1>
+            m${name}.getListData(view,"param").subscribe(dataRxSubscriber);
+     </#if>
+      }
 <#elseif  viewIndex==1>
+    }
       override fun lazyLoad() {
          <#if rxType==0>
               m${name}.getListData(view.context,"param").observe(view,dataSubscriber);

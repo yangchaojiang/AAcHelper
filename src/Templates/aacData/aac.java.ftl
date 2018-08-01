@@ -12,7 +12,8 @@ import com.aac.expansion.data.AacDataActivity;
 <#elseif viewIndex==1>
 
 import com.aac.expansion.data.AacDataFragment;
-
+import android.support.annotation.NonNull;
+import android.os.Bundle
 <#else>
 import android.content.Context;
 import android.content.Intent;
@@ -37,7 +38,7 @@ public class ${name}${viewName} extends AacData${viewName}<${name}Presenter, ${b
     }
 <#elseif viewIndex==1>
 
-    public ${name}${viewName}  getInstance(@NonNUll String param){
+    public ${name}${viewName}  getInstance(@NonNull String param){
          ${name}${viewName}  fragment=new ${name}${viewName}();
          Bundle  mBundle=new Bundle();
          mBundle.putString("param",param);

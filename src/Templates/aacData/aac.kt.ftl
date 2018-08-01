@@ -7,6 +7,7 @@ import android.content.Intent
 import com.aac.expansion.data.AacDataActivity;
 import  kotlinx.android.synthetic.main.activity_${smallName}.*
 <#elseif viewIndex==1>
+import android.os.Bundle
 import com.aac.expansion.data.AacDataFragment;
 import  kotlinx.android.synthetic.main.fragment_${smallName}.*
 <#else>

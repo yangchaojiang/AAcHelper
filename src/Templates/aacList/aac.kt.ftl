@@ -6,7 +6,9 @@ import android.content.Intent
 import android.os.Bundle
 import com.aac.expansion.list.AacListActivity
 <#elseif viewIndex==1>
+import android.os.Bundle
 import android.view.View
+import android.support.annotation.NonNull
 import com.aac.expansion.list.AacListFragment
 </#if>
 import com.chad.library.adapter.base.BaseViewHolder

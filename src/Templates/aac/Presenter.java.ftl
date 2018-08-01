@@ -2,18 +2,18 @@
 
 
 <#if viewIndex==0>
-<#if rxType==1>
+<#if rxType==0>
 import com.aac.module.ui.AacPresenter;
-<#elseif rxType==2>
+<#elseif rxType==1>
 import com.aac.module.rx2.presenter.AacRxPresenter;
  <#else>
 
  </#if>
 <#elseif viewIndex==1>
-<#if rxType==1>
+<#if rxType==0>
 import com.aac.module.ui.AacFragmentPresenter;
-<#elseif rxType==2>
-import com.aac.module.ui.AacFragmentPresenter;
+<#elseif rxType==1>
+import com.aac.module.rx2.presenter.AacRxFragmentPresenter;
  <#else>
 
  </#if>

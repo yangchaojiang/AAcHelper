@@ -9,6 +9,7 @@ import com.aac.module.ui.AacActivity
 import  kotlinx.android.synthetic.main.activity_${smallName}.*
 <#elseif viewIndex==1>
 import android.os.Bundle
+import android.support.annotation.NonNull;
 import android.view.View
 import com.aac.module.ui.AacFragment
 import  kotlinx.android.synthetic.main.fragment_${smallName}.*

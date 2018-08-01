@@ -13,7 +13,7 @@ import com.aac.module.rx2.presenter.AacRxPresenter
 <#if rxType==0>
 import com.aac.module.ui.AacFragmentPresenter
 <#elseif rxType==1>
-import com.aac.module.ui.AacFragmentPresenter
+import com.aac.module.rx2.presenter.AacRxFragmentPresenter
  <#else>
 
  </#if>

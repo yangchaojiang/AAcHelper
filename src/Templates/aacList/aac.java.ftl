@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.aac.expansion.list.AacListActivity;
 <#elseif viewIndex==1>
 import android.view.View;
+import android.support.annotation.NonNull;
 import com.aac.expansion.list.AacListFragment;
 <#else >
 
@@ -42,12 +43,12 @@ public class ${name}${viewName} extends AacList${viewName}<${name}Presenter, ${b
     //setStartLoadMore(true);
     }
 
-    public ${name}${viewName}  getInstance(@NonNUll String param){
+    public ${name}${viewName}  getInstance(@NonNull String param){
           ${name}${viewName}  fragment=new ${name}${viewName}();
           Bundle  mBundle=new Bundle();
           mBundle.putString("param",param);
           fragment.setArguments(mBundle);
-          return mBundle;
+          return fragment;
 }
 </#if>
      @Override
