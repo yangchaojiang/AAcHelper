@@ -25,7 +25,7 @@ import java.util.List;
 
 public class ${name}ViewModel extends AacViewModel {
 <#if isHttp>
-   <#if dataType==1>
+   <#if dataType=1>
         <#if rxType==0>
   public LiveData<${beanBean}> getData(Context context,String param) {
      HttpParams params = new HttpParams();
@@ -47,7 +47,7 @@ public class ${name}ViewModel extends AacViewModel {
     }
        <#else >
       </#if>
-   <#elseif dataType==2>
+   <#elseif dataType>=2>
        <#if rxType==0>
      public LiveData<List<${beanBean}>> getListData(Context context, String param) {
              HttpParams params = new HttpParams();

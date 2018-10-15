@@ -3,10 +3,12 @@
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
+<#if dataType==3>
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+</#if>
 <#include "../commnt/file_header_info.ftl">
 
-public class ${beanBean} implements Parcelable {
+public class ${beanBean} implements Parcelable<#if dataType==3>,MultiItemEntity</#if>{
 
 
     protected ${beanBean}(Parcel in) {
@@ -31,4 +33,10 @@ public class ${beanBean} implements Parcelable {
             return new ${beanBean}[size];
         }
     };
+<#if dataType==3>
+    @Override
+    public int getItemType() {
+        return 0;
+    }
+</#if>
 }

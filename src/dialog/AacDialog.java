@@ -35,16 +35,16 @@ public class AacDialog extends JDialog {
         setTitle("输入您的模块名称");
         setSize(600, 300);
         buttonOK.addActionListener(e -> onOK());
-        comboBoxRxType.setEnabled(false);
+       // comboBoxRxType.setEnabled(false);
         textFieldKey.setEnabled(false);
         buttonCancel.addActionListener(e -> onCancel());
         checkBoxType.addChangeListener(e -> {
             if (checkBoxType.isSelected()){
-                comboBoxRxType.setEnabled(true);
+               // comboBoxRxType.setEnabled(true);
                 textFieldKey.setEnabled(true);
             }else {
-                comboBoxRxType.setEnabled(false);
-                textFieldKey.setEnabled(false);
+               // comboBoxRxType.setEnabled(false);
+               textFieldKey.setEnabled(false);
             }
         });
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

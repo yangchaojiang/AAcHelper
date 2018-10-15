@@ -2,17 +2,17 @@
 
 <#if viewIndex==0>
     <#if rxType==0>
-import com.aac.expansion.list.AacListAPresenter;
+import com.aac.expansion.list.AacMultiListAPresenter;
     <#elseif rxType==1>
-import com.aac.module.rx2.presenter.list.AacRxListAPresenter;
+import com.aac.module.rx2.presenter.list.AacRxMultiListAPresenter;
     <#else>
 
     </#if>
 <#elseif viewIndex==1>
     <#if rxType==0>
-import com.aac.expansion.list.AacListFPresenter;
+import com.aac.expansion.list.AacMultiListFPresenter;
     <#elseif rxType==1>
-import com.aac.module.rx2.presenter.list.AacRxListFPresenter;
+import com.aac.module.rx2.presenter.list.AacRxMultiListFPresenter;
     <#else>
 
     </#if>
@@ -23,7 +23,7 @@ import ${importPtah}.bean.${beanBean};
 
 <#include "../commnt/file_header_info.ftl">
 
-public class ${name}Presenter extends <#if viewIndex==0>Aac<#if rxType==1>Rx</#if>ListAPresenter<#elseif viewIndex==1>Aac<#if rxType==1>Rx</#if>ListFPresenter</#if><${name}${viewName}, ${beanBean}> {
+public class ${name}Presenter extends <#if viewIndex==0>Aac<#if rxType==1>Rx</#if>MultiListAPresenter<#elseif viewIndex==1>Aac<#if rxType==1>Rx</#if>MultiListFPresenter</#if><${name}${viewName}, ${beanBean}> {
     public static final String TAG = ${name}Presenter.class.getName();
     private ${name}ViewModel m${name};
     @Override
@@ -42,6 +42,7 @@ public class ${name}Presenter extends <#if viewIndex==0>Aac<#if rxType==1>Rx</#i
         m${name}.getListData(getView().getContext(),"id").subscribe(getDataRxSubscriber());
         </#if>
     <#elseif viewIndex==0>
+
         <#if rxType==0>
          m${name}.getListData(getView(),"id").observe(getView(),getDataSubscriber());
         <#elseif rxType==1>
@@ -51,16 +52,9 @@ public class ${name}Presenter extends <#if viewIndex==0>Aac<#if rxType==1>Rx</#i
 </#if>
      }
 <#if viewIndex==1>
-
      @Override
      protected void lazyLoad() {
-    <#if  isHttp>
-        <#if rxType==0>
-                 m${name}.getListData(getView().getContext(),"param").observe(getView(),getDataSubscriber());
-        <#elseif rxType==1>
-                   m${name}.getListData(getView().getContext(),"param").subscribe(getDataRxSubscriber());
-        </#if>
-    </#if>
+         setLoadData(1);
      }
 </#if>
 }

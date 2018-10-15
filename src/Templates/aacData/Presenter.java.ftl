@@ -43,11 +43,13 @@ public class ${name}Presenter extends <#if viewIndex==0> Aac<#if rxType==1>Rx</#
     }
 
     public void getData() {
+<#if  isHttp>
     <#if rxType==0>
       m${name}.getData(getView(),"id").observe(getView(), getDataSubscriber());
     <#elseif rxType==1>
       m${name}.getData(getView(),"id").subscribe(getDataRxSubscriber());
     </#if>
+</#if>
     }
 <#if viewIndex==1>
     @Override

@@ -3,21 +3,21 @@
 
 <#if viewIndex==0>
 import com.aac.expansion.data.AacDataAPresenter
-<#if rxType==0>
+    <#if rxType==0>
 import com.aac.expansion.data.AacDataAPresenter
-<#elseif rxType==1>
+    <#elseif rxType==1>
 import com.aac.module.rx2.presenter.data.AacRxDataAPresenter
- <#else>
+    <#else>
 
- </#if>
+    </#if>
 <#elseif viewIndex==1>
-<#if rxType==0>
+    <#if rxType==0>
 import com.aac.expansion.data.AacDataFPresenter
-<#elseif rxType==1>
+    <#elseif rxType==1>
 import com.aac.module.rx2.presenter.data.AacRxDataFPresenter
- <#else>
+    <#else>
 
- </#if>
+    </#if>
 </#if>
 import ${importPtah}.model.${name}ViewModel
 import ${importPtah}.ui.${name}${viewName}
@@ -39,11 +39,13 @@ class ${name}Presenter : <#if viewIndex==0> Aac<#if rxType==1>Rx</#if>DataAPrese
          getData()
      }
      fun getData() {
-       <#if rxType==0>
+<#if  isHttp>
+    <#if rxType==0>
           m${name}.getData(view.context,"id").observe(view, dataSubscriber)
-         <#elseif rxType==1>
+    <#elseif rxType==1>
            m${name}.getData(getView(),"id").subscribe(dataRxSubscriber);
-         </#if>
+    </#if>
+</#if>
      }
 
 <#if viewIndex==1>

@@ -57,8 +57,10 @@ public class AacAction extends AnAction {
             type = "aac";
         } else if (bean.getIndexDataType() == 1) {
             type = "aacData";
-        } else {
+        } else if (bean.getIndexDataType() == 2) {
             type = "aacList";
+        } else {
+            type = "aacMultiList";
         }
         init(bean, type);
     }
@@ -69,16 +71,19 @@ public class AacAction extends AnAction {
         String presenterType;
         String viewModelType;
         String beanNames;
+        String adapterName;
         if (bean.getLanType() == 1) {
             s = "aac.kt.ftl";
             presenterType = "Presenter.kt.ftl";
             viewModelType = "ViewModel.kt.ftl";
             beanNames = "TestBean.kt.ftl";
+            adapterName="Adapter.kt.ftl";
         } else {
             s = "aac.java.ftl";
             presenterType = "Presenter.java.ftl";
             viewModelType = "ViewModel.java.ftl";
             beanNames = "TestBean.java.ftl";
+            adapterName="Adapter.java.ftl";
         }
         // 创建四个MVP
         String basePath = freeMarkerUtil.getBasePath();
@@ -89,6 +94,13 @@ public class AacAction extends AnAction {
         freeMarkerUtil.createFiles("view", viewModelType, basePath + "/" + smallName + "/model");
         if (bean.getIndexDataType() > 0) {
             freeMarkerUtil.createFiles("bean", beanNames, basePath + "/" + smallName + "/bean");
+        }
+        if (bean.getIndexDataType() == 3) {
+            if (bean.getLanType() == 1) {
+                freeMarkerUtil.createFiles("Adapter", adapterName, basePath + "/" + smallName + "/adapter");
+            } else {
+                freeMarkerUtil.createFiles("Adapter", adapterName, basePath + "/" + smallName + "/adapter");
+            }
         }
         if (bean.getIndexViewType() != 2) {
             //写入layout 资源文件

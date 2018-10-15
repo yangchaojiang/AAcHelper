@@ -49,7 +49,7 @@ class ${name}ViewModel : AacViewModel() {
   <#else >
 
  </#if>
-<#elseif dataType==2>
+<#elseif dataType>=2>
       <#if rxType==0>
       fun getListData(context: Context, param: String): LiveData<List<${beanBean}>> {
           val params = HttpParams()
